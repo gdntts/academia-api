@@ -3,6 +3,7 @@ package dev.gustavodntts.mastersys.service;
 import dev.gustavodntts.mastersys.domain.Aluno;
 import dev.gustavodntts.mastersys.dto.AlunoRequest;
 import dev.gustavodntts.mastersys.dto.AlunoResponse;
+import dev.gustavodntts.mastersys.exception.RegraNegocioException;
 import dev.gustavodntts.mastersys.repository.AlunoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ public class AlunoService {
 
     public AlunoResponse cadastrar(AlunoRequest request) {
         if (request.email() != null && alunoRepository.existsByEmail(request.email())) {
-            throw new RuntimeException("Já existe um aluno cadastrado com " + "esse email");
+            throw new RegraNegocioException("Já existe um aluno cadastrado com " + "esse email");
         }
 
         Aluno aluno = request.toEntity();
@@ -34,14 +35,14 @@ public class AlunoService {
 
     public AlunoResponse buscarPorId(Long id) {
         Aluno aluno = buscarEntidadePorId(id);
-        
+
         return AlunoResponse.fromEntity(aluno);
     }
 
     public AlunoResponse atualizar(Long id, AlunoRequest request) {
         Aluno aluno = buscarEntidadePorId(id);
         request.preencher(aluno);
-        
+
         Aluno alunoAtualizado = alunoRepository.save(aluno);
 
         return AlunoResponse.fromEntity(alunoAtualizado);
@@ -53,7 +54,6 @@ public class AlunoService {
     }
 
     public Aluno buscarEntidadePorId(Long id) {
-        return alunoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        return alunoRepository.findById(id).orElseThrow(() -> new RegraNegocioException("Aluno" + " não encontrado"));
     }
 }
