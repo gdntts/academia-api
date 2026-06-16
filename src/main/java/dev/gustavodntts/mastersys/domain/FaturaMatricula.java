@@ -4,6 +4,7 @@ import dev.gustavodntts.mastersys.domain.enums.StatusFatura;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,10 +20,10 @@ public class FaturaMatricula {
     private LocalDateTime dataPagamento;
 
     @Column(name = "data_cancelamento")
-    private LocalDateTime dataCancelamento;
+    private LocalDate dataCancelamento;
 
     @Column(name = "data_vencimento")
-    private LocalDateTime dataVencimento;
+    private LocalDate dataVencimento;
 
     @Enumerated(EnumType.STRING)
     private StatusFatura status = StatusFatura.ABERTA;
@@ -55,19 +56,19 @@ public class FaturaMatricula {
         this.dataPagamento = dataPagamento;
     }
 
-    public LocalDateTime getDataCancelamento() {
+    public LocalDate getDataCancelamento() {
         return dataCancelamento;
     }
 
-    public void setDataCancelamento(LocalDateTime dataCancelamento) {
+    public void setDataCancelamento(LocalDate dataCancelamento) {
         this.dataCancelamento = dataCancelamento;
     }
 
-    public LocalDateTime getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(LocalDateTime dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
