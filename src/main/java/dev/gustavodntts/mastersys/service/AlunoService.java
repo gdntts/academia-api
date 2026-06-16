@@ -18,7 +18,7 @@ public class AlunoService {
     }
 
     public AlunoResponse cadastrar(AlunoRequest request) {
-        if (request.email() != null && alunoRepository.existByEmail(request.email())) {
+        if (request.email() != null && alunoRepository.existsByEmail(request.email())) {
             throw new RuntimeException("Já existe um aluno cadastrado com " + "esse email");
         }
 
