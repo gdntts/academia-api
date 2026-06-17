@@ -28,8 +28,7 @@ public class AlunoController {
     }
 
     @GetMapping
-    public Page<AlunoResponse> listar(AlunoFiltroRequest filtro,
-                                      Pageable pageable) {
+    public Page<AlunoResponse> listar(AlunoFiltroRequest filtro, Pageable pageable) {
         return alunoService.listar(filtro, pageable);
     }
 
