@@ -13,11 +13,12 @@ public interface RelatorioAcademiaRepository extends Repository<FaturaMatricula,
 
     @Query(value = """
             SELECT TO_CHAR(data_vencimento, 'YYYY-MM') AS mes,
-                   SUM(valor) AS total_faturamento
+                   SUM(valor) AS total_faturamento,
+                   SUM(valor) AS valor_total
             FROM faturas_matriculas
             WHERE status = 'PAGA'
             GROUP BY TO_CHAR(data_vencimento, 'YYYY-MM')
-            ORDER BY mes  
+            ORDER BY mes
             """, nativeQuery = true
 
     )
@@ -26,16 +27,16 @@ public interface RelatorioAcademiaRepository extends Repository<FaturaMatricula,
     @Query(value = """
             SELECT cidade,
                      COUNT(*) AS quantidade
-            FROM alunos 
+            FROM alunos
             GROUP BY cidade
-            ORDER BY quantidade desc  
+            ORDER BY quantidade desc
             """, nativeQuery = true
 
     )
     List<AlunosPorCidadeProjection> alunosPorCidade();
 
     @Query(value = """
-            SELECT 
+            SELECT
                 m.id as matriculaId,
                 a.nome AS alunoNome,
                 f.data_vencimento AS dataVencimento,

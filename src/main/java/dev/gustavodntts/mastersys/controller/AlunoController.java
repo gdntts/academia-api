@@ -1,19 +1,19 @@
 package dev.gustavodntts.mastersys.controller;
 
+import dev.gustavodntts.mastersys.doc.AlunoControllerDoc;
 import dev.gustavodntts.mastersys.dto.AlunoFiltroRequest;
+import dev.gustavodntts.mastersys.dto.AlunoRequest;
+import dev.gustavodntts.mastersys.dto.AlunoResponse;
+import dev.gustavodntts.mastersys.service.AlunoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import dev.gustavodntts.mastersys.dto.AlunoRequest;
-import dev.gustavodntts.mastersys.dto.AlunoResponse;
-import dev.gustavodntts.mastersys.service.AlunoService;
-
 @RestController
 @RequestMapping("/alunos")
-public class AlunoController {
+public class AlunoController implements AlunoControllerDoc {
 
     private final AlunoService alunoService;
 
